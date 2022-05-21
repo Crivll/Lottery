@@ -1,0 +1,7 @@
+com\ljh\lottery\rpc\res\ActivityRes$ActivityResBuilder.class
+com\ljh\lottery\rpc\res\ActivityRes.class
+com\ljh\lottery\rpc\IActivityBooth.class
+com\ljh\lottery\rpc\req\ActivityReq$ActivityReqBuilder.class
+com\ljh\lottery\rpc\dto\ActivityDto$ActivityDtoBuilder.class
+com\ljh\lottery\rpc\dto\ActivityDto.class
+com\ljh\lottery\rpc\req\ActivityReq.class
