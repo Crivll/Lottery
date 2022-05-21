@@ -12,10 +12,6 @@ import lombok.NoArgsConstructor;
  * @Author: ljh
  * DateTime: 2022-05-21 11:50
  */
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class Constants {
 
     public enum ResponseCode {
