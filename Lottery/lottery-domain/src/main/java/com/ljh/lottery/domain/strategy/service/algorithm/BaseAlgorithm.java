@@ -2,6 +2,7 @@ package com.ljh.lottery.domain.strategy.service.algorithm;
 
 import com.ljh.lottery.domain.strategy.model.vo.AwardRateInfo;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,4 +27,40 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm{
 
     // 奖品区间概率值，strategyId -> [awardId->begin、awardId->end]
     protected Map<Long, List<AwardRateInfo>> awardRateInfoMap = new ConcurrentHashMap<>();
+
+    @Override
+    public void initRateTuple(Long strategyId, List<AwardRateInfo> awardRateInfoList) {
+        //保存奖品概率信息
+        awardRateInfoMap.put(strategyId, awardRateInfoList);
+
+        String[] rateTuple = rateTupleMap.computeIfAbsent(strategyId, k -> new String[RATE_TUPLE_LENGTH]);
+
+        int cursorVal = 0;
+        for (AwardRateInfo awardRateInfo : awardRateInfoList) {
+            int rateVal = awardRateInfo.getAwardRate().multiply(new BigDecimal(100)).intValue();
+
+            //循环填充概率范围值
+            for (int i = cursorVal + 1; i <= (rateVal + cursorVal); i++) {
+                rateTuple[hashIdx(i)] = awardRateInfo.getAwardId();
+            }
+
+            cursorVal += rateVal;
+        }
+    }
+
+    @Override
+    public boolean isExistRateTuple(Long strategyId) {
+        return rateTupleMap.containsKey(strategyId);
+    }
+
+    /**
+     * 斐波那契（Fibonacci）散列法，计算哈希索引下标值
+     *
+     * @param val 值
+     * @return 索引
+     */
+    protected int hashIdx(int val) {
+        int hashCode = val * HASH_INCREMENT + HASH_INCREMENT;
+        return hashCode & (RATE_TUPLE_LENGTH - 1);
+    }
 }
