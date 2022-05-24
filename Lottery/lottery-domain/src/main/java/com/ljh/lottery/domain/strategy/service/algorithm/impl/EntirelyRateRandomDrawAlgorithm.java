@@ -2,6 +2,7 @@ package com.ljh.lottery.domain.strategy.service.algorithm.impl;
 
 import com.ljh.lottery.domain.strategy.model.vo.AwardRateInfo;
 import com.ljh.lottery.domain.strategy.service.algorithm.BaseAlgorithm;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -15,7 +16,8 @@ import java.util.List;
  * @Author: ljh
  * DateTime: 2022-05-22 18:54
  */
-public class DefaultRateRandomDrawAlgorithm extends BaseAlgorithm {
+@Component("entirelyRateRandomDrawAlgorithm")
+public class EntirelyRateRandomDrawAlgorithm extends BaseAlgorithm {
     @Override
     public String randomDraw(Long strategyId, List<String> excludeAwardIds) {
 
