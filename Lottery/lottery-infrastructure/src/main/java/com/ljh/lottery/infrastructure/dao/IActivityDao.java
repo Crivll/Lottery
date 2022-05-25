@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:
+ * Description: 活动dao接口
  *
  * @Author: ljh
  * DateTime: 2022-05-21 12:07
