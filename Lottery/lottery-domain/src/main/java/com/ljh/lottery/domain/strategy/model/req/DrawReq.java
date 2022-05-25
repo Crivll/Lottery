@@ -26,5 +26,5 @@ public class DrawReq {
     /**
      * 策略Id
      */
-    private String strategyId;
+    private Long strategyId;
 }

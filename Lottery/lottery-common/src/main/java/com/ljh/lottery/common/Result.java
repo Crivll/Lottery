@@ -17,7 +17,6 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = -3826891916021780628L;
@@ -40,5 +39,21 @@ public class Result<T> implements Serializable {
 
     public static Result buildErrorResult() {
         return new Result(Constants.ResponseCode.UN_ERROR.getCode(), Constants.ResponseCode.UN_ERROR.getInfo());
+    }
+
+    public static <T> Result success(T data) {
+        Result<T> result = new Result<>();
+        result.setCode(Constants.ResponseCode.SUCCESS.getCode());
+        result.setData(data);
+        result.setInfo(Constants.ResponseCode.SUCCESS.getInfo());
+        return result;
+    }
+
+    public static <T> Result success(T data, String info) {
+        Result<T> result = new Result<>();
+        result.setCode(Constants.ResponseCode.SUCCESS.getCode());
+        result.setData(data);
+        result.setInfo(info);
+        return result;
     }
 }
