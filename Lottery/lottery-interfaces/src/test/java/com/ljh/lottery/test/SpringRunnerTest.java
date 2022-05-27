@@ -2,8 +2,15 @@ package com.ljh.lottery.test;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
+import com.ljh.lottery.common.Constants;
+import com.ljh.lottery.domain.award.model.req.GoodsReq;
+import com.ljh.lottery.domain.award.model.res.DistributionRes;
+import com.ljh.lottery.domain.award.service.factory.DistributionGoodsFactory;
+import com.ljh.lottery.domain.award.service.goods.IDistributionGoods;
 import com.ljh.lottery.domain.strategy.model.req.DrawReq;
+import com.ljh.lottery.domain.strategy.model.res.DrawResult;
 import com.ljh.lottery.domain.strategy.model.vo.AwardRateInfo;
+import com.ljh.lottery.domain.strategy.model.vo.DrawAwardInfo;
 import com.ljh.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import com.ljh.lottery.domain.strategy.service.draw.IDrawExec;
 import com.ljh.lottery.infrastructure.dao.IActivityDao;
@@ -44,13 +51,9 @@ public class SpringRunnerTest {
     private IDrawExec drawExec;
 
     @Resource
-    private IStrategyDao strategyDao;
+    private DistributionGoodsFactory distributionGoodsFactory;
 
-    @Resource
-    private IStrategyDetailDao strategyDetailDao;
 
-    @Resource(name = "singleRateRandomDrawAlgorithm")
-    private IDrawAlgorithm randomDrawAlgorithm;
 
     @Test
     public void test_drawExec() {
@@ -65,6 +68,35 @@ public class SpringRunnerTest {
         drawExec.doDrawExec(new DrawReq("小佳佳", 10001L));
         drawExec.doDrawExec(new DrawReq("小蜗牛", 10001L));
         drawExec.doDrawExec(new DrawReq("八杯水", 10001L));
+    }
+
+    @Test
+    public void test_award() {
+        // 执行抽奖
+        DrawResult drawResult = drawExec.doDrawExec(new DrawReq("小傅哥", 10001L));
+
+        // 判断抽奖结果
+        Integer drawState = drawResult.getDrawState();
+        if (Constants.DrawState.FAIL.getCode().equals(drawState)) {
+            logger.info("未中奖 DrawAwardInfo is null");
+            return;
+        }
+
+        // 封装发奖参数，orderId：2109313442431 为模拟ID，需要在用户参与领奖活动时生成
+        DrawAwardInfo drawAwardInfo = drawResult.getDrawAwardInfo();
+        GoodsReq goodsReq = GoodsReq.builder()
+                .uId(drawResult.getUId())
+                .orderId("2109313442431")
+                .awardId(drawAwardInfo.getAwardId())
+                .awardName(drawAwardInfo.getAwardName())
+                .awardContent(drawAwardInfo.getAwardContent())
+                .build();
+
+        // 根据 awardType 从抽奖工厂中获取对应的发奖服务
+        IDistributionGoods distributionGoodsService = distributionGoodsFactory.getDistributionGoodsService(drawAwardInfo.getAwardType());
+        DistributionRes distributionRes = distributionGoodsService.doDistribution(goodsReq);
+
+        logger.info("测试结果：{}", JSON.toJSONString(distributionRes));
     }
 
     @Test

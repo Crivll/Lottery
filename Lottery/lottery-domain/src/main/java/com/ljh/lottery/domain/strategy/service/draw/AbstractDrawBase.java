@@ -6,7 +6,9 @@ import com.ljh.lottery.domain.strategy.model.aggregates.StrategyRich;
 import com.ljh.lottery.domain.strategy.model.req.DrawReq;
 import com.ljh.lottery.domain.strategy.model.res.DrawResult;
 import com.ljh.lottery.domain.strategy.model.vo.AwardRateInfo;
+import com.ljh.lottery.domain.strategy.model.vo.DrawAwardInfo;
 import com.ljh.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
+import com.ljh.lottery.infrastructure.po.Award;
 import com.ljh.lottery.infrastructure.po.Strategy;
 import com.ljh.lottery.infrastructure.po.StrategyDetail;
 import org.slf4j.Logger;
@@ -43,9 +45,7 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
         String awardId = this.drawAlgorithm(req.getStrategyId(), drawAlgorithmMap.get(strategy.getStrategyMode()), excludeAwardIds);
 
         // 5. 包装中奖结果
-        return DrawResult.builder()
-                .rewardId(awardId).strategyId(req.getStrategyId())
-                .uId(req.getUId()).build();
+        return buildDrawResult(req.getUId(), req.getStrategyId(), awardId);
     }
 
     /**
@@ -94,5 +94,29 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
         }
 
         drawAlgorithm.initRateTuple(strategyId, awardRateInfoList);
+    }
+
+    /**
+     * 包装抽奖结果
+     *
+     * @param uId        用户ID
+     * @param strategyId 策略ID
+     * @param awardId    奖品ID，null 情况：并发抽奖情况下，库存临界值1 -> 0，会有用户中奖结果为 null
+     * @return 中奖结果
+     */
+    private DrawResult buildDrawResult(String uId, Long strategyId, String awardId) {
+        if (null == awardId) {
+            logger.info("执行策略抽奖完成【未中奖】，用户：{} 策略ID：{}", uId, strategyId);
+            return DrawResult.builder()
+                    .uId(uId).strategyId(strategyId)
+                    .drawState(Constants.DrawState.FAIL.getCode()).build();
+        }
+
+        Award award = super.queryAwardInfoByAwardId(awardId);
+        DrawAwardInfo drawAwardInfo = new DrawAwardInfo(award.getAwardId(), award.getAwardType(), award.getAwardName(), award.getAwardContent());
+        logger.info("执行策略抽奖完成【已中奖】，用户：{} 策略ID：{} 奖品ID：{} 奖品名称：{}", uId, strategyId, awardId, award.getAwardName());
+        return DrawResult.builder()
+                .uId(uId).strategyId(strategyId).drawState(Constants.DrawState.SUCCESS.getCode())
+                .drawAwardInfo(drawAwardInfo).build();
     }
 }
