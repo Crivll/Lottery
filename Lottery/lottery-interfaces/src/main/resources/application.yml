@@ -11,6 +11,7 @@ spring:
 mybatis:
   mapper-locations: classpath:/mybatis/mapper/*.xml
   config-location:  classpath:/mybatis/config/mybatis-config.xml
+  type-aliases-package: com.ljh.lottery.infrastructure.po
 
 # Dubbo 广播方式配置
 dubbo:

@@ -17,7 +17,6 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class StrategyDetail {
 
     /**
@@ -34,6 +33,11 @@ public class StrategyDetail {
      * 奖品ID
      */
     private String awardId;
+
+    /**
+     * 奖品名称
+     */
+    private String awardName;
 
     /**
      * 奖品库存
