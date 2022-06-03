@@ -1,5 +1,6 @@
 package com.ljh.lottery.infrastructure.dao;
 
+import com.ljh.lottery.domain.strategy.model.vo.StrategyBriefVO;
 import com.ljh.lottery.infrastructure.po.Strategy;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,4 +21,11 @@ public interface IStrategyDao {
      * @return           策略配置信息
      */
     Strategy queryStrategy(Long strategyId);
+
+    /**
+     * 插入策略配置
+     *
+     * @param req 策略配置
+     */
+    void insert(Strategy req);
 }

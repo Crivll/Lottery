@@ -1,7 +1,7 @@
 package com.ljh.lottery.domain.strategy.repository;
 
 import com.ljh.lottery.domain.strategy.model.aggregates.StrategyRich;
-import com.ljh.lottery.infrastructure.po.Award;
+import com.ljh.lottery.domain.strategy.model.vo.AwardBriefVO;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public interface IStrategyRepository {
      * @param awardId
      * @return
      */
-    Award queryAwardInfo(String awardId);
+    AwardBriefVO queryAwardInfo(String awardId);
 
     /**
      * 查询指定策略下无库存的奖品清单

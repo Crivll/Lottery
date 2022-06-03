@@ -29,8 +29,8 @@ public class Result<T> implements Serializable {
         this.info = info;
     }
 
-    public static Result buildResult(String code, String info) {
-        return new Result(code, info);
+    public static Result buildResult(Constants.ResponseCode code, String info) {
+        return new Result(code.getCode(), info);
     }
 
     public static Result buildSuccessResult() {
@@ -39,6 +39,10 @@ public class Result<T> implements Serializable {
 
     public static Result buildErrorResult() {
         return new Result(Constants.ResponseCode.UN_ERROR.getCode(), Constants.ResponseCode.UN_ERROR.getInfo());
+    }
+
+    public static Result buildErrorResult(String info) {
+        return new Result(Constants.ResponseCode.UN_ERROR.getCode(), info);
     }
 
     public static <T> Result success(T data) {

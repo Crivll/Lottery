@@ -1,8 +1,8 @@
 package com.ljh.lottery.domain.strategy.model.aggregates;
 
 
-import com.ljh.lottery.infrastructure.po.Strategy;
-import com.ljh.lottery.infrastructure.po.StrategyDetail;
+import com.ljh.lottery.domain.strategy.model.vo.StrategyBriefVO;
+import com.ljh.lottery.domain.strategy.model.vo.StrategyDetailBriefVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,10 +31,10 @@ public class StrategyRich {
     /**
      * 策略配置
      */
-    private Strategy strategy;
+    private StrategyBriefVO strategy;
 
     /**
      * 策略明细
      */
-    private List<StrategyDetail> strategyDetailList;
+    private List<StrategyDetailBriefVO> strategyDetailList;
 }
