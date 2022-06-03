@@ -12,6 +12,7 @@ import com.ljh.lottery.infrastructure.po.Award;
 import com.ljh.lottery.infrastructure.po.Strategy;
 import com.ljh.lottery.infrastructure.po.StrategyDetail;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
  * @Author: ljh
  * DateTime: 2022-06-03 18:14
  */
+@Component
 public class ActivityRepository implements IActivityRepository {
 
     @Resource

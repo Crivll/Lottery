@@ -3,6 +3,7 @@ package com.ljh.lottery.domain.activity.service.stateflow.event;
 import com.ljh.lottery.common.Constants;
 import com.ljh.lottery.common.Result;
 import com.ljh.lottery.domain.activity.service.stateflow.AbstractState;
+import org.springframework.stereotype.Component;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,6 +12,7 @@ import com.ljh.lottery.domain.activity.service.stateflow.AbstractState;
  * @Author: ljh
  * DateTime: 2022-06-03 15:51
  */
+@Component
 public class EditingState extends AbstractState {
     @Override
     public Result arraignment(Long activityId, Enum<Constants.ActivityState> currentState) {
