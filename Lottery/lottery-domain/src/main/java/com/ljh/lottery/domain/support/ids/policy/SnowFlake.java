@@ -1,0 +1,44 @@
+package com.ljh.lottery.domain.support.ids.policy;
+
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.net.NetUtil;
+import cn.hutool.core.util.IdUtil;
+import com.ljh.lottery.domain.support.ids.IIdGenerator;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+
+/**
+ * Created with IntelliJ IDEA.
+ * Description: hutool 工具包下的雪花算法，15位雪花算法推荐：
+ * https://github.com/yitter/idgenerator/blob/master/Java/source/src/main/java/com/github/yitter/core/SnowWorkerM1.java
+ *
+ * @Author: ljh
+ * DateTime: 2022-06-04 19:13
+ */
+@Component
+public class SnowFlake implements IIdGenerator {
+
+    private Snowflake snowflake;
+
+    @PostConstruct
+    public void init() {
+        // 0 - 31 位， 可以采用配置的方式使用
+        long wokerId;
+        try {
+            wokerId = NetUtil.ipv4ToLong(NetUtil.getLocalhostStr());
+        } catch (Exception e) {
+            wokerId = NetUtil.getLocalhostStr().hashCode();
+        }
+
+        wokerId = wokerId >> 16 & 31;
+
+        long dataCenterId = 1L;
+        snowflake = IdUtil.createSnowflake(wokerId, dataCenterId);
+    }
+
+    @Override
+    public long nextId() {
+        return snowflake.nextId();
+    }
+}
