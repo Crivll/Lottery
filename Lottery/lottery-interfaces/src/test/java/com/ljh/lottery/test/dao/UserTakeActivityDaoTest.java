@@ -41,4 +41,6 @@ public class UserTakeActivityDaoTest {
 
         userTakeActivityDao.insert(userTakeActivity);
     }
+
+    // 敲几行代码，试试.idea是否被取消跟踪
 }
