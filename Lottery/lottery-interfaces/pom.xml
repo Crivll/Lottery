@@ -77,7 +77,10 @@
             <artifactId>lottery-domain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.ljh.middleware</groupId>
+            <artifactId>db-router-spring-boot-starter</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
