@@ -1,5 +1,9 @@
 package com.ljh.lottery.domain.activity.service.partake;
 
+import com.ljh.lottery.common.Result;
+import com.ljh.lottery.domain.activity.model.req.PartakeReq;
+import com.ljh.lottery.domain.activity.model.res.PartakeResult;
+
 /**
  * Created with IntelliJ IDEA.
  * Description: 抽奖活动参与接口
@@ -10,7 +14,9 @@ package com.ljh.lottery.domain.activity.service.partake;
 public interface IActivityPartake {
 
     /**
-     * TODO：待开发活动参与接口
+     * 参与活动
+     * @param req
+     * @return
      */
-    void doPartake();
+    Result<PartakeResult> doPartake(PartakeReq req);
 }
