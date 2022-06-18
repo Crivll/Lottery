@@ -1,5 +1,8 @@
 package com.ljh.lottery.domain.activity.repository;
 
+import com.ljh.lottery.domain.activity.model.vo.DrawOrderVO;
+import com.ljh.lottery.domain.activity.model.vo.UserTakeActivityVO;
+
 import java.util.Date;
 
 /**
@@ -35,4 +38,26 @@ public interface IUserTakeActivityRepository {
      */
     void takeActivity(Long activityId, String activityName, Integer takeCount, Integer userTakeLeftCount, String uId, Date partakeDate, Long takeId);
 
+    /**
+     * 锁定活动领取记录
+     * @param uId
+     * @param activityId
+     * @param takeId
+     * @return
+     */
+    int lockTackActivity(String uId, Long activityId, Long takeId);
+
+    /**
+     * 保存抽奖信息
+     * @param drawOrder 中奖单
+     */
+    void saveUserStrategyExport(DrawOrderVO drawOrder);
+
+    /**
+     * 查询是否存在未执行的抽奖领取单
+     * @param activityId
+     * @param uId
+     * @return
+     */
+    UserTakeActivityVO queryNoConsumedTakeActivityOrder(Long activityId, String uId);
 }

@@ -24,4 +24,9 @@ public class PartakeResult {
      */
     private Long strategyId;
 
+    /**
+     * 活动领取ID
+     */
+    private Long takeId;
+
 }

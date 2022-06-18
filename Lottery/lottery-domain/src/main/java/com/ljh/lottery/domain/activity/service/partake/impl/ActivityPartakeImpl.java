@@ -4,6 +4,7 @@ import com.ljh.lottery.common.Constants;
 import com.ljh.lottery.common.Result;
 import com.ljh.lottery.domain.activity.model.req.PartakeReq;
 import com.ljh.lottery.domain.activity.model.vo.ActivityBillVO;
+import com.ljh.lottery.domain.activity.model.vo.UserTakeActivityVO;
 import com.ljh.lottery.domain.activity.repository.IUserTakeActivityRepository;
 import com.ljh.lottery.domain.activity.service.partake.BaseActivityPartake;
 import com.ljh.lottery.domain.support.ids.IIdGenerator;
@@ -38,6 +39,11 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
     private TransactionTemplate transactionTemplate;
     @Resource
     private IDBRouterStrategy dbRouter;
+
+    @Override
+    protected UserTakeActivityVO queryNoConsumedTakeActivityOrder(Long activityId, String uId) {
+        return userTakeActivityRepository.queryNoConsumedTakeActivityOrder(activityId, uId);
+    }
 
     @Override
     protected Result checkActivityBill(PartakeReq partake, ActivityBillVO bill) {
@@ -78,7 +84,7 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
     }
 
     @Override
-    protected Result grabActivity(PartakeReq partake, ActivityBillVO bill) {
+    protected Result grabActivity(PartakeReq partake, ActivityBillVO bill, Long takeId) {
         try {
             dbRouter.doRouter(partake.getuId());
             return transactionTemplate.execute(status -> {
@@ -97,7 +103,8 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
                     }
 
                     // 插入领取活动信息
-                    Long takeId = idGeneratorMap.get(Constants.Ids.SnowFlake).nextId();
+                    // Long takeId = idGeneratorMap.get(Constants.Ids.SnowFlake).nextId();
+                    // 为避免重复领取，不在此处生成领取编号，在外层判断并生成编号
                     userTakeActivityRepository.takeActivity(bill.getActivityId()
                             , bill.getActivityName()
                             , bill.getTakeCount()
