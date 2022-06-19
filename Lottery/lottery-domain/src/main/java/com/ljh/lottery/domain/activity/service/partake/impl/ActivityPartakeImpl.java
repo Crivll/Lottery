@@ -22,7 +22,7 @@ import java.util.regex.Matcher;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:
+ * Description: 活动参与功能实现
  *
  * @Author: ljh
  * DateTime: 2022-06-10 18:37
@@ -34,8 +34,6 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
 
     @Resource
     private IUserTakeActivityRepository userTakeActivityRepository;
-    @Resource
-    private Map<Constants.Ids, IIdGenerator> idGeneratorMap;
     @Resource
     private TransactionTemplate transactionTemplate;
     @Resource
