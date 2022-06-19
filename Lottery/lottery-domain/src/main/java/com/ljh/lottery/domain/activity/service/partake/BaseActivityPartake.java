@@ -87,6 +87,7 @@ public abstract class BaseActivityPartake extends ActivityPartakeSupport impleme
      * 领取活动
      * @param partake
      * @param bill
+     * @param takeId
      * @return
      */
     protected abstract Result grabActivity(PartakeReq partake, ActivityBillVO bill, Long takeId);

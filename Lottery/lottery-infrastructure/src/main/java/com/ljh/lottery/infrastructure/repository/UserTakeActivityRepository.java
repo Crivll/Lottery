@@ -1,5 +1,6 @@
 package com.ljh.lottery.infrastructure.repository;
 
+import com.ljh.lottery.common.Constants;
 import com.ljh.lottery.domain.activity.model.vo.DrawOrderVO;
 import com.ljh.lottery.domain.activity.model.vo.UserTakeActivityVO;
 import com.ljh.lottery.domain.activity.repository.IUserTakeActivityRepository;
@@ -51,7 +52,7 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
     }
 
     @Override
-    public void takeActivity(Long activityId, String activityName, Integer takeCount, Integer userTakeLeftCount, String uId, Date partakeDate, Long takeId) {
+    public void takeActivity(Long activityId, String activityName, Long strategyId, Integer takeCount, Integer userTakeLeftCount, String uId, Date partakeDate, Long takeId) {
         UserTakeActivity userTakeActivity = new UserTakeActivity();
         userTakeActivity.setuId(uId);
         userTakeActivity.setTakeId(takeId);
@@ -63,6 +64,8 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
         } else {
             userTakeActivity.setTakeCount(takeCount - userTakeLeftCount);
         }
+        userTakeActivity.setStrategyId(strategyId);
+        userTakeActivity.setState(Constants.TaskState.NO_USED.getCode());
         String uuid = uId + "_" + activityId + "_" + userTakeActivity.getTakeCount();
         userTakeActivity.setUuid(uuid);
 

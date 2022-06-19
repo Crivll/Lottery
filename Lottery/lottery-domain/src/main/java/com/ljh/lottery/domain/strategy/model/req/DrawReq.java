@@ -27,4 +27,38 @@ public class DrawReq {
      * 策略Id
      */
     private Long strategyId;
+
+    /**
+     * 防重ID
+     */
+    private String uuid;
+
+    public DrawReq(String uId, Long strategyId) {
+        this.uId = uId;
+        this.strategyId = strategyId;
+    }
+
+    public String getuId() {
+        return uId;
+    }
+
+    public void setuId(String uId) {
+        this.uId = uId;
+    }
+
+    public Long getStrategyId() {
+        return strategyId;
+    }
+
+    public void setStrategyId(Long strategyId) {
+        this.strategyId = strategyId;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 }

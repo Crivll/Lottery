@@ -3,6 +3,7 @@ package com.ljh.lottery.domain.activity.service.partake;
 import com.ljh.lottery.common.Result;
 import com.ljh.lottery.domain.activity.model.req.PartakeReq;
 import com.ljh.lottery.domain.activity.model.res.PartakeResult;
+import com.ljh.lottery.domain.activity.model.vo.DrawOrderVO;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,4 +20,11 @@ public interface IActivityPartake {
      * @return
      */
     Result<PartakeResult> doPartake(PartakeReq req);
+
+    /**
+     * 保存奖品单
+     * @param drawOrder
+     * @return
+     */
+    Result recordDrawOrder(DrawOrderVO drawOrder);
 }
