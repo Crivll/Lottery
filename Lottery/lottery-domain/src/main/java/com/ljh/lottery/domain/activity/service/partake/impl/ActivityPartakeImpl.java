@@ -93,7 +93,7 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
                             , bill.getActivityName()
                             , bill.getTakeCount()
                             , bill.getUserTakeLeftCount()
-                            , bill.getuId()
+                            , partake.getuId()
                             , partake.getPartakeDate());
                     if (0 == updateCount) {
                         status.setRollbackOnly();

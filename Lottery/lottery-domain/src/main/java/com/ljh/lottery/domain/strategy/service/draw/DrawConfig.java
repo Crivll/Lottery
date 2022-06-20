@@ -26,11 +26,11 @@ public class DrawConfig {
     /**
      * 抽奖策略组
      */
-    protected static Map<Integer, IDrawAlgorithm> drawAlgorithmMap = new ConcurrentHashMap<>();
+    protected static Map<Integer, IDrawAlgorithm> drawAlgorithmGroup = new ConcurrentHashMap<>();
 
     @PostConstruct
     public void init() {
-        drawAlgorithmMap.put(Constants.StrategyMode.ENTIRETY.getCode(), entirelyRateRandomDrawAlgorithm);
-        drawAlgorithmMap.put(Constants.StrategyMode.SINGLE.getCode(), singleRateRandomDrawAlgorithm);
+        drawAlgorithmGroup.put(Constants.StrategyMode.ENTIRETY.getCode(), entirelyRateRandomDrawAlgorithm);
+        drawAlgorithmGroup.put(Constants.StrategyMode.SINGLE.getCode(), singleRateRandomDrawAlgorithm);
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:
+ * Description: 单项随机概率抽奖，抽到一个已经排除掉的奖品则视为未中奖
  *
  * @Author: ljh
  * DateTime: 2022-05-22 18:54

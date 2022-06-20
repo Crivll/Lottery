@@ -49,7 +49,7 @@ public class EntirelyRateRandomDrawAlgorithm extends BaseAlgorithm {
         int randomVal = this.generateSecureRandomIntCode(100);
 
         // 循环获取奖品
-        String awardId = "";
+        String awardId = null;
         int cursorVal = 0;
         for (AwardRateInfo awardRateInfo : differenceAwardRateList) {
             int rateVal = awardRateInfo.getAwardRate()

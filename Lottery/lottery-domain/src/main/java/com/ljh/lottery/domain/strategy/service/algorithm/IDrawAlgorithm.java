@@ -32,14 +32,14 @@ public interface IDrawAlgorithm {
      * @param strategyId        策略ID
      * @param awardRateInfoList 奖品概率配置集合 「值示例：AwardRateInfo.awardRate = 0.04」
      */
-    void initRateTuple(Long strategyId, List<AwardRateInfo> awardRateInfoList);
+    void initRateTuple(Long strategyId, Integer strategyMode, List<AwardRateInfo> awardRateInfoList);
 
     /**
-     * 判断是否已经，做了数据初始化
+     * 判断是否已经做了数据初始化
      * @param strategyId
      * @return
      */
-    boolean isExistRateTuple(Long strategyId);
+    boolean isExist(Long strategyId);
 
     /**
      * SecureRandom 生成随机数，索引到对应的奖品信息返回结果
