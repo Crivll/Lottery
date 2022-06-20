@@ -1,5 +1,6 @@
 package com.ljh.lottery.test;
 
+import com.ljh.lottery.common.Constants;
 import com.ljh.lottery.domain.strategy.model.vo.AwardRateInfo;
 import com.ljh.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import org.junit.Before;
@@ -38,7 +39,7 @@ public class DrawAlgorithmTest {
         strategyList.add(new AwardRateInfo("五等奖：充电宝", new BigDecimal("0.35")));
 
         // 初始数据
-        randomDrawAlgorithm.initRateTuple(100001L, strategyList);
+        randomDrawAlgorithm.initRateTuple(100001L, Constants.StrategyMode.SINGLE.getCode(), strategyList);
     }
 
     @Test
