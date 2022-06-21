@@ -37,8 +37,8 @@ public class EngineResult {
         this.isSuccess = isSuccess;
     }
 
-    public EngineResult(boolean isSuccess, String userId, Long treeId, Long nodeId, String nodeValue) {
-        this.isSuccess = isSuccess;
+    public EngineResult(String userId, Long treeId, Long nodeId, String nodeValue) {
+        this.isSuccess = true;
         this.userId = userId;
         this.treeId = treeId;
         this.nodeId = nodeId;
