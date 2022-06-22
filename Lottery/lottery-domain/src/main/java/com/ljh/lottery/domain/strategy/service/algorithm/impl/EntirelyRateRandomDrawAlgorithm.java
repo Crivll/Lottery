@@ -1,11 +1,10 @@
 package com.ljh.lottery.domain.strategy.service.algorithm.impl;
 
-import com.ljh.lottery.domain.strategy.model.vo.AwardRateInfo;
+import com.ljh.lottery.domain.strategy.model.vo.AwardRateVO;
 import com.ljh.lottery.domain.strategy.service.algorithm.BaseAlgorithm;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,9 +23,9 @@ public class EntirelyRateRandomDrawAlgorithm extends BaseAlgorithm {
         BigDecimal differenceDenominator = BigDecimal.ZERO;
 
         // 排除掉不在抽奖范围内的奖品ID集合
-        List<AwardRateInfo> differenceAwardRateList = new ArrayList<>();
-        List<AwardRateInfo> awardRateIntervalValList = awardRateInfoMap.get(strategyId);
-        for (AwardRateInfo awardRateInfo : awardRateIntervalValList) {
+        List<AwardRateVO> differenceAwardRateList = new ArrayList<>();
+        List<AwardRateVO> awardRateIntervalValList = awardRateInfoMap.get(strategyId);
+        for (AwardRateVO awardRateInfo : awardRateIntervalValList) {
             String awardId = awardRateInfo.getAwardId();
             if (excludeAwardIds.contains(awardId)) {
                 continue;
@@ -51,7 +50,7 @@ public class EntirelyRateRandomDrawAlgorithm extends BaseAlgorithm {
         // 循环获取奖品
         String awardId = null;
         int cursorVal = 0;
-        for (AwardRateInfo awardRateInfo : differenceAwardRateList) {
+        for (AwardRateVO awardRateInfo : differenceAwardRateList) {
             int rateVal = awardRateInfo.getAwardRate()
                     .divide(differenceDenominator, 2, BigDecimal.ROUND_UP)
                     .multiply(new BigDecimal(100)).intValue();

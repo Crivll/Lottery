@@ -1,7 +1,7 @@
 package com.ljh.lottery.domain.strategy.service.algorithm;
 
 import com.ljh.lottery.common.Constants;
-import com.ljh.lottery.domain.strategy.model.vo.AwardRateInfo;
+import com.ljh.lottery.domain.strategy.model.vo.AwardRateVO;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
@@ -36,10 +36,10 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm{
     /**
      * 奖品区间概率值，strategyId -> [awardId->begin、awardId->end]
      */
-    protected Map<Long, List<AwardRateInfo>> awardRateInfoMap = new ConcurrentHashMap<>();
+    protected Map<Long, List<AwardRateVO>> awardRateInfoMap = new ConcurrentHashMap<>();
 
     @Override
-    public void initRateTuple(Long strategyId, Integer strategyMode, List<AwardRateInfo> awardRateInfoList) {
+    public void initRateTuple(Long strategyId, Integer strategyMode, List<AwardRateVO> awardRateInfoList) {
 
         // 前置判断
         if (awardRateInfoMap.containsKey(strategyId)) {
@@ -57,7 +57,7 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm{
         String[] rateTuple = rateTupleMap.computeIfAbsent(strategyId, k -> new String[RATE_TUPLE_LENGTH]);
 
         int cursorVal = 0;
-        for (AwardRateInfo awardRateInfo : awardRateInfoList) {
+        for (AwardRateVO awardRateInfo : awardRateInfoList) {
             int rateVal = awardRateInfo.getAwardRate().multiply(new BigDecimal(100)).intValue();
 
             //循环填充概率范围值

@@ -2,7 +2,6 @@ package com.ljh.lottery.application.process;
 
 import com.ljh.lottery.application.process.req.DrawProcessReq;
 import com.ljh.lottery.common.Result;
-import com.ljh.lottery.domain.strategy.model.vo.DrawAwardInfo;
 
 /**
  * Created with IntelliJ IDEA.

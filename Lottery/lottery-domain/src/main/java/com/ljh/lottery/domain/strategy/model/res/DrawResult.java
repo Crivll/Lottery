@@ -1,7 +1,7 @@
 package com.ljh.lottery.domain.strategy.model.res;
 
 import com.ljh.lottery.common.Constants;
-import com.ljh.lottery.domain.strategy.model.vo.DrawAwardInfo;
+import com.ljh.lottery.domain.strategy.model.vo.DrawAwardVO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,7 +38,7 @@ public class DrawResult {
     /**
      * 中奖奖品信息
      */
-    private DrawAwardInfo drawAwardInfo;
+    private DrawAwardVO drawAwardInfo;
 
     /**
      * 奖品名称

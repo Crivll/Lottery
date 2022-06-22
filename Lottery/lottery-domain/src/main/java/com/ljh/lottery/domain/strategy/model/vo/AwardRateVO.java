@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AwardRateInfo {
+public class AwardRateVO {
 
     /**
      * 奖品ID

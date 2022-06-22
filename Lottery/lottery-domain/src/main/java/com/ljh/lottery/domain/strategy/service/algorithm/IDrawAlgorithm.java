@@ -1,6 +1,6 @@
 package com.ljh.lottery.domain.strategy.service.algorithm;
 
-import com.ljh.lottery.domain.strategy.model.vo.AwardRateInfo;
+import com.ljh.lottery.domain.strategy.model.vo.AwardRateVO;
 
 import java.util.List;
 
@@ -30,9 +30,9 @@ public interface IDrawAlgorithm {
      * 5. 当后续通过随机数获取到1-100的值后，可以直接定位到对应的奖品信息，通过这样的方式把轮训算奖的时间复杂度从O(n) 降低到 0(1)
      *
      * @param strategyId        策略ID
-     * @param awardRateInfoList 奖品概率配置集合 「值示例：AwardRateInfo.awardRate = 0.04」
+     * @param awardRateInfoList 奖品概率配置集合 「值示例：AwardRateVO.awardRate = 0.04」
      */
-    void initRateTuple(Long strategyId, Integer strategyMode, List<AwardRateInfo> awardRateInfoList);
+    void initRateTuple(Long strategyId, Integer strategyMode, List<AwardRateVO> awardRateInfoList);
 
     /**
      * 判断是否已经做了数据初始化

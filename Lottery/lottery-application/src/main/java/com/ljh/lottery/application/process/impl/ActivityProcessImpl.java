@@ -10,7 +10,7 @@ import com.ljh.lottery.domain.activity.model.vo.DrawOrderVO;
 import com.ljh.lottery.domain.activity.service.partake.IActivityPartake;
 import com.ljh.lottery.domain.strategy.model.req.DrawReq;
 import com.ljh.lottery.domain.strategy.model.res.DrawResult;
-import com.ljh.lottery.domain.strategy.model.vo.DrawAwardInfo;
+import com.ljh.lottery.domain.strategy.model.vo.DrawAwardVO;
 import com.ljh.lottery.domain.strategy.service.draw.IDrawExec;
 import com.ljh.lottery.domain.support.ids.IIdGenerator;
 import org.springframework.stereotype.Service;
@@ -57,7 +57,7 @@ public class ActivityProcessImpl implements IActivityProcess {
                     .info(Constants.ResponseCode.LOSING_DRAW.getInfo())
                     .build();
         }
-        DrawAwardInfo drawAwardInfo = drawResult.getDrawAwardInfo();
+        DrawAwardVO drawAwardInfo = drawResult.getDrawAwardInfo();
 
         // 3. 抽奖结果落库
         activityPartake.recordDrawOrder(buildDrawOrderVO(req, strategyId, takeId, drawAwardInfo));
@@ -68,7 +68,7 @@ public class ActivityProcessImpl implements IActivityProcess {
         return Result.success(drawAwardInfo);
     }
 
-    private DrawOrderVO buildDrawOrderVO(DrawProcessReq req, Long strategyId, Long takeId, DrawAwardInfo drawAwardInfo) {
+    private DrawOrderVO buildDrawOrderVO(DrawProcessReq req, Long strategyId, Long takeId, DrawAwardVO drawAwardInfo) {
         long orderId = idGeneratorMap.get(Constants.Ids.SnowFlake).nextId();
         DrawOrderVO drawOrderVO = new DrawOrderVO();
         drawOrderVO.setuId(req.getuId());
