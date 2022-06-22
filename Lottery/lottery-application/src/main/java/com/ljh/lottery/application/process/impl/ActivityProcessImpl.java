@@ -2,12 +2,16 @@ package com.ljh.lottery.application.process.impl;
 
 import com.ljh.lottery.application.process.IActivityProcess;
 import com.ljh.lottery.application.process.req.DrawProcessReq;
+import com.ljh.lottery.application.process.res.RuleQuantificationResult;
 import com.ljh.lottery.common.Constants;
 import com.ljh.lottery.common.Result;
 import com.ljh.lottery.domain.activity.model.req.PartakeReq;
 import com.ljh.lottery.domain.activity.model.res.PartakeResult;
 import com.ljh.lottery.domain.activity.model.vo.DrawOrderVO;
 import com.ljh.lottery.domain.activity.service.partake.IActivityPartake;
+import com.ljh.lottery.domain.rule.model.req.DecisionMatterReq;
+import com.ljh.lottery.domain.rule.model.res.EngineResult;
+import com.ljh.lottery.domain.rule.service.engine.EngineFilter;
 import com.ljh.lottery.domain.strategy.model.req.DrawReq;
 import com.ljh.lottery.domain.strategy.model.res.DrawResult;
 import com.ljh.lottery.domain.strategy.model.vo.DrawAwardVO;
@@ -34,6 +38,8 @@ public class ActivityProcessImpl implements IActivityProcess {
     private IDrawExec drawExec;
     @Resource
     private Map<Constants.Ids, IIdGenerator> idGeneratorMap;
+    @Resource(name = "ruleEngineHandler")
+    private EngineFilter engineFilter;
 
 
     @Override
@@ -66,6 +72,21 @@ public class ActivityProcessImpl implements IActivityProcess {
 
         // 5. 返回结果
         return Result.success(drawAwardInfo);
+    }
+
+    @Override
+    public RuleQuantificationResult doRuleQuantification(DecisionMatterReq req) {
+        // 1. 量化决策
+        EngineResult engineResult = engineFilter.process(req);
+
+        if (!engineResult.isSuccess()) {
+            return new RuleQuantificationResult(Constants.ResponseCode.RULE_ERR.getCode(), Constants.ResponseCode.RULE_ERR.getInfo());
+        }
+        // 2. 封装结果
+        RuleQuantificationResult ruleQuantificationResult = new RuleQuantificationResult(Constants.ResponseCode.SUCCESS.getCode(), Constants.ResponseCode.SUCCESS.getInfo());
+        ruleQuantificationResult.setActivityId(Long.valueOf(engineResult.getNodeValue()));
+
+        return ruleQuantificationResult;
     }
 
     private DrawOrderVO buildDrawOrderVO(DrawProcessReq req, Long strategyId, Long takeId, DrawAwardVO drawAwardInfo) {
