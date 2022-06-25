@@ -77,7 +77,7 @@ public class SpringRunnerTest {
         DrawAwardVO drawAwardInfo = drawResult.getDrawAwardInfo();
         GoodsReq goodsReq = GoodsReq.builder()
                 .uId(drawResult.getUId())
-                .orderId("2109313442431")
+                .orderId(2109313442431L)
                 .awardId(drawAwardInfo.getAwardId())
                 .awardName(drawAwardInfo.getAwardName())
                 .awardContent(drawAwardInfo.getAwardContent())

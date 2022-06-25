@@ -1,6 +1,6 @@
 package com.ljh.lottery.test.application;
 
-import com.ljh.lottery.application.mq.KafkaProducer;
+import com.ljh.lottery.application.mq.producer.KafkaProducer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
