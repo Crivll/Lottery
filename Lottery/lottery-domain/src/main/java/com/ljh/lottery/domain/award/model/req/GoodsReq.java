@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:
+ * Description: 奖品发货信息
  *
  * @Author: ljh
  * DateTime: 2022-05-27 20:40
  */
 @Builder
+@AllArgsConstructor
 public class GoodsReq {
 
     /**
