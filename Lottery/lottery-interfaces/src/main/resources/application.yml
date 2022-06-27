@@ -46,6 +46,24 @@ spring:
       ack-mode: manual_immediate
       missing-topics-fatal: false
 
+# xxl-job
+# 官网：https://github.com/xuxueli/xxl-job/
+# 地址：http://localhost:7397/xxl-job-admin 【需要先启动 xxl-job】
+# 账号：admin
+# 密码：123456
+xxl:
+  job:
+    admin:
+      address: http://127.0.0.1:7397/xxl-job-admin
+    executor:
+      address:
+      app-name: lottery-job
+      ip:
+      port: 9998
+      log-path: /Logs/ljh/xxl-job/jobhandler
+      log-retention-days: 50
+    access-token:
+
 # 多数据源路由配置
 mini-db-router:
   jdbc:

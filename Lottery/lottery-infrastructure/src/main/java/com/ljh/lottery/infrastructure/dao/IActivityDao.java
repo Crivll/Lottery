@@ -4,6 +4,8 @@ import com.ljh.lottery.domain.activity.model.vo.AlterStateVO;
 import com.ljh.lottery.infrastructure.po.Activity;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * Description: 活动dao接口
@@ -43,4 +45,12 @@ public interface IActivityDao {
      * @return 更新数量
      */
     int subtractionActivityStock(Long activityId);
+
+    /**
+     * 扫描待处理的活动列表，状态为：通过、活动中
+     *
+     * @param id ID
+     * @return 待处理的活动集合
+     */
+    List<Activity> scanToDoActivityList(Long id);
 }

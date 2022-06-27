@@ -21,6 +21,11 @@ import java.util.Date;
 public class ActivityVO {
 
     /**
+     * 自增ID
+     */
+    private Long id;
+
+    /**
      * 活动ID
      */
     private Long activityId;
@@ -56,6 +61,11 @@ public class ActivityVO {
     private Integer takeCount;
 
     /**
+     * 策略ID
+     */
+    private Long strategyId;
+
+    /**
      * 活动状态：编辑、提审、撤审、通过、运行、拒绝、关闭、开启
      */
     private Integer state;
@@ -75,6 +85,7 @@ public class ActivityVO {
                 ", endDateTime=" + endDateTime +
                 ", stockCount=" + stockCount +
                 ", takeCount=" + takeCount +
+                ", strategyId=" + strategyId +
                 ", state=" + state +
                 ", creator='" + creator + '\'' +
                 '}';
