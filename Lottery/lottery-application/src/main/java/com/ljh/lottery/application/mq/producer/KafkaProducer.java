@@ -65,6 +65,11 @@ public class KafkaProducer {
         });
     }
 
+    /**
+     * 发送中奖物品发货单消息
+     * @param invoice   发货单
+     * @return
+     */
     public ListenableFuture<SendResult<String, Object>> sendLotteryInvoice(InvoiceVO invoice) {
         String objJson = JSON.toJSONString(invoice);
         logger.info("发送MQ消息 topic: {}, bizId: {}, message: {}", TOPIC_INVOICE, invoice.getuId(), objJson);

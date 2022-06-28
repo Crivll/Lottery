@@ -6,6 +6,8 @@ import com.ljh.middleware.db.router.annotation.DBRouter;
 import com.ljh.middleware.db.router.annotation.DBRouterStrategy;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * Created with IntelliJ IDEA.
  * Description:
@@ -45,4 +47,11 @@ public interface IUserStrategyExportDao {
      */
     @DBRouter
     void updateInvoiceMqState(UserStrategyExport userStrategyExport);
+
+    /**
+     * 扫描发货单 MQ 状态，把未发送 MQ 的单子扫描出来，做补偿
+     *
+     * @return 发货单
+     */
+    List<UserStrategyExport> scanInvoiceMqState();
 }
